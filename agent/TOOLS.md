@@ -5,7 +5,7 @@
 ## 安装
 
 ```bash
-pipx install think-cli
+pipx install dong-think
 ```
 
 ## 命令列表
