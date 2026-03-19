@@ -5,7 +5,7 @@
 ## 安装
 
 ```bash
-pip install think-cli
+pipx install dong-think
 ```
 
 ## 快速开始
