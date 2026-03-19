@@ -1,6 +1,6 @@
 [project]
 name = "think-cli"
-version = "0.3.0"
+version = "0.4.0"
 description = "思咚咚 - 记录灵感和想法的 CLI 工具"
 authors = [{name = "gudong", email = "gudong@example.com"}]
 readme = "README.md"
