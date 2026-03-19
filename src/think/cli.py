@@ -9,7 +9,7 @@ app = typer.Typer(
 )
 
 # 导入命令
-from .commands import init, add, ls, get, delete, search, update, review, stats
+from .commands import init, add, ls, get, delete, search, update, review, stats, tags
 
 app.command()(init.init)
 app.command()(add.add)
@@ -20,6 +20,7 @@ app.command()(search.search)
 app.command()(update.update)
 app.command()(review.review)
 app.command()(stats.stats)
+app.command()(tags.tags)
 
 def main():
     app()

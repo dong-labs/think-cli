@@ -1,76 +1,96 @@
 # TOOLS.md - 工具箱
 
-我的核心工具是 `think` CLI。
+我的核心工具是 `dong-think` CLI。
+
+## 安装
+
+```bash
+pipx install think-cli
+```
 
 ## 命令列表
+
+### 初始化
+
+```bash
+dong-think init
+```
 
 ### 记录想法
 
 ```bash
-think add "想法内容"
-think add "想法内容" --tag 标签
-think add "想法内容" --priority high
+dong-think add "一个新想法"
+dong-think add "三层架构设计" --tags "架构,设计"
+dong-think add "重要想法" --priority high
 ```
 
 ### 列出想法
 
 ```bash
-think list              # 列出最近 20 条
-think list --today      # 今天的想法
-think list --week       # 本周的想法
-think list --tag xxx    # 按标签筛选
+dong-think list              # 列出所有想法
+dong-think list --limit 50   # 指定数量
+dong-think list --tag "架构" # 按标签筛选
 ```
 
 ### 搜索想法
 
 ```bash
-think search "关键词"
+dong-think search "关键词"
+dong-think search "架构" --limit 10
 ```
 
 ### 获取详情
 
 ```bash
-think get 123           # 获取 ID 为 123 的想法详情
+dong-think get 123           # 获取想法详情
 ```
 
 ### 更新想法
 
 ```bash
-think update 123 --status todo
-think update 123 --add-tag 重要
-think update 123 --priority high
+dong-think update 123 --content "更新内容"
+dong-think update 123 --priority high
 ```
 
 ### 删除想法
 
 ```bash
-think delete 123 --force
+dong-think delete 123
 ```
 
-### 回顾想法
+### 查看标签
 
 ```bash
-think review            # 随机一条
-think review --today    # 今天的想法
-think review --week     # 本周的想法
+dong-think tags              # 列出所有标签及数量
 ```
 
 ### 统计信息
 
 ```bash
-think stats
+dong-think stats             # 统计想法数量、状态分布、标签分布
+```
+
+### 回顾想法
+
+```bash
+dong-think review            # 随机回顾一个想法
 ```
 
 ## JSON 输出
 
-所有命令支持 `--json` 参数，方便解析：
+所有命令支持 JSON 输出，方便 AI 解析：
 
 ```bash
-think add "xxx" --json
-think list --json
-think search "xxx" --json
+dong-think add "xxx"
+dong-think list
+dong-think search "关键词"
+dong-think stats
 ```
+
+## 数据库
+
+数据存储在 `~/.dong/think.db`
 
 ---
 
-*💡 工具在手，想法我有*
+*💡 灵感稍纵即逝，记录永恒*
