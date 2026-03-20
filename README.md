@@ -2,6 +2,8 @@
 
 > 💡 记录灵感和思考的 CLI 工具
 
+[![Version](https://img.shields.io/badge/Version-0.4.0-blue.svg)](https://pypi.org/project/dong-think/)
+
 ## 安装
 
 ```bash
