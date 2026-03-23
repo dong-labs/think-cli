@@ -14,6 +14,11 @@ from rich.table import Table
 console = Console()
 
 
+def _is_option_info(value):
+    """检查是否是 Typer OptionInfo 对象"""
+    return hasattr(value, '__class__') and value.__class__.__name__ == 'OptionInfo'
+
+
 @json_output
 def add(
     content: str = typer.Argument(..., help="想法内容"),
@@ -27,6 +32,16 @@ def add(
     """记录想法"""
     if not content or not content.strip():
         raise ValidationError("content", "想法内容不能为空")
+
+    # 过滤 OptionInfo 对象，使用默认值
+    if _is_option_info(priority):
+        priority = "normal"
+    if _is_option_info(context):
+        context = None
+    if _is_option_info(source_agent):
+        source_agent = None
+    if _is_option_info(note):
+        note = None
 
     conn = get_connection()
 

@@ -13,6 +13,11 @@ from rich.panel import Panel
 console = Console()
 
 
+def _is_option_info(value):
+    """检查是否是 Typer OptionInfo 对象"""
+    return hasattr(value, '__class__') and value.__class__.__name__ == 'OptionInfo'
+
+
 def list_ideas(
     limit: int = typer.Option(DEFAULT_LIMIT, "--limit", "-l", help="显示数量"),
     today: bool = typer.Option(False, "--today", help="只显示今天的"),
@@ -33,6 +38,12 @@ def list_ideas(
         status: 按状态筛选
         json_output: JSON 输出
     """
+    # 过滤 OptionInfo 对象
+    if _is_option_info(priority):
+        priority = None
+    if _is_option_info(status):
+        status = None
+
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -83,7 +94,6 @@ def list_ideas(
 
     cursor.execute(query, params)
     rows = cursor.fetchall()
-    conn.close()
 
     if json_output:
         ideas = [Idea.from_row(row).to_dict() for row in rows]
@@ -132,13 +142,11 @@ def list_ideas(
             time_str,
         )
 
-    console.print(table)
-
-    # 统计信息（重新查询，因为连接已关闭）
-    total_conn = get_connection()
-    total = total_conn.execute("SELECT COUNT(*) FROM ideas").fetchone()[0]
-    total_conn.close()
+    # 统计信息（使用同一个连接）
+    total = conn.execute("SELECT COUNT(*) FROM ideas").fetchone()[0]
     console.print(f"\n总计: {total} 条想法")
+
+    conn.close()
 
 
 if __name__ == "__main__":

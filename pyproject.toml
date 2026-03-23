@@ -1,6 +1,6 @@
 [project]
 name = "dong-think"
-version = "0.7.3"
+version = "0.7.4"
 description = "思咚咚 - 记录灵感和想法的 CLI 工具"
 authors = [{name = "gudong", email = "gudong@example.com"}]
 readme = "README.md"
